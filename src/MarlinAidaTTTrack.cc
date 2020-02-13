@@ -331,10 +331,7 @@ namespace MarlinTrk {
 
     traj.prepareForFitting();
 	      
-    int success = traj.fit();
-	      
-
-    if( success ) { 
+    if( traj.fit() ) { 
 
       const aidaTT::fitResults* result = traj.getFitResults();
       
