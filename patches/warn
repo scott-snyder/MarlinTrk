@@ -1,5 +1,5 @@
 Bottom: 11f513bedc353db56f1c9d4ff58231613e8d6f1b
-Top:    11f513bedc353db56f1c9d4ff58231613e8d6f1b
+Top:    0f0e11a5894c030876dcf77b660c07ce8d8dabe2
 Author: scott snyder <sss@karma>
 Date:   2020-02-13 03:30:34 -0500
 
@@ -8,4 +8,61 @@ Fix compilation warnings.
 
 ---
 
-
+diff --git a/src/HelixFit.cc b/src/HelixFit.cc
+index 4d2d6b3..eac1d23 100644
+--- a/src/HelixFit.cc
++++ b/src/HelixFit.cc
+@@ -54,7 +54,7 @@ namespace MarlinTrk{
+       ee0[i]=0.0;
+     }
+     
+-    for( int i=1; i < 5; ++i){
++    for( int i=0; i < 5; ++i){
+       grad[i]= 0.0;
+       vv0[i] = 0.0;
+     }
+diff --git a/src/MarlinAidaTTTrack.cc b/src/MarlinAidaTTTrack.cc
+index 9c09893..32cea20 100644
+--- a/src/MarlinAidaTTTrack.cc
++++ b/src/MarlinAidaTTTrack.cc
+@@ -331,10 +331,7 @@ namespace MarlinTrk {
+ 
+     traj.prepareForFitting();
+ 	      
+-    int success = traj.fit();
+-	      
+-
+-    if( success ) { 
++    if( traj.fit() ) { 
+ 
+       const aidaTT::fitResults* result = traj.getFitResults();
+       
+diff --git a/src/MarlinDDKalTestTrack.cc b/src/MarlinDDKalTestTrack.cc
+index f623fb2..70435ff 100644
+--- a/src/MarlinDDKalTestTrack.cc
++++ b/src/MarlinDDKalTestTrack.cc
+@@ -876,9 +876,9 @@ namespace MarlinTrk {
+     
+     if( _ktest->getOption(  MarlinTrk::IMarlinTrkSystem::CFG::useSmoothing ) ){
+       streamlog_out( DEBUG2 )  << "Perform Smoothing for All Previous Measurement Sites " << std::endl ;
+-      int error = this->smooth() ;
++      int serror = this->smooth() ;
+       
+-      if( error != success ) return error ;
++      if( serror != success ) return serror ;
+       
+     }
+     
+diff --git a/src/MarlinTrkUtils.cc b/src/MarlinTrkUtils.cc
+index 548ebde..67b954b 100644
+--- a/src/MarlinTrkUtils.cc
++++ b/src/MarlinTrkUtils.cc
+@@ -326,7 +326,7 @@ namespace MarlinTrk {
+   
+   
+   
+-  int createPrefit( std::vector<EVENT::TrackerHit*>& hit_list, IMPL::TrackStateImpl* pre_fit, float bfield_z, bool fit_direction){
++  int createPrefit( std::vector<EVENT::TrackerHit*>& hit_list, IMPL::TrackStateImpl* pre_fit, float bfield_z, bool /*fit_direction*/){
+     
+     ///////////////////////////////////////////////////////
+     // check inputs
