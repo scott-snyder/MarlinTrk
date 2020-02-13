@@ -876,9 +876,9 @@ namespace MarlinTrk {
     
     if( _ktest->getOption(  MarlinTrk::IMarlinTrkSystem::CFG::useSmoothing ) ){
       streamlog_out( DEBUG2 )  << "Perform Smoothing for All Previous Measurement Sites " << std::endl ;
-      int error = this->smooth() ;
+      int serror = this->smooth() ;
       
-      if( error != success ) return error ;
+      if( serror != success ) return serror ;
       
     }
     
