@@ -1,0 +1,7 @@
+Bottom: 6d459b8c2029250566216eed00f6f34d99ac7535
+Top:    6d459b8c2029250566216eed00f6f34d99ac7535
+Author: sss <sss@karma>
+Date:   2025-03-13 11:42:34 -0400
+
+Avoid repeated dynamic_cast.
+(check)
