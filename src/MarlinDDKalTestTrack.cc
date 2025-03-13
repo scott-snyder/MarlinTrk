@@ -591,17 +591,20 @@ namespace MarlinTrk {
       
     }
     
+    const DDVMeasLayer& measlayer = dynamic_cast<const DDVMeasLayer&>( kalhit->GetMeasLayer() );
+
     // here do dynamic cast repeatedly in DEBUG statement as this will be stripped out any way for production code
     // otherwise we have to do the cast outside of the DEBUG statement and it won't be stripped out 
     streamlog_out( DEBUG1 )  << "Kaltrack::addAndFit :  add site to track at index : " 
-    << (dynamic_cast<const DDVMeasLayer*>( &(kalhit->GetMeasLayer() ) ))->GetIndex() 
+    << measlayer.GetIndex() 
     << " for type " 
-    << dynamic_cast<const DDVMeasLayer*>( &(kalhit->GetMeasLayer() ) )->GetName() ;
+    << measlayer.GetName() ;
     streamlog_out( DEBUG0 ) << " with CellIDs:";
-    
-    for (unsigned int i = 0; i < (dynamic_cast<const DDVMeasLayer*>( &(kalhit->GetMeasLayer() ) )->getNCellIDs());++i) {
+
+    unsigned int ncellids = measlayer.getNCellIDs();
+    for (unsigned int i = 0; i < ncellids;++i) {
       streamlog_out( DEBUG0 )  << " : " 
-      << dynamic_cast<const DDVMeasLayer*>( &(kalhit->GetMeasLayer() ) )->getCellIDs()[i] ;
+      << measlayer.getCellIDs()[i] ;
       
     }
     
@@ -625,7 +628,7 @@ namespace MarlinTrk {
       
       chi2increment = temp_site->GetDeltaChi2() ;
       // get the measurement layer of the current hit
-      const DDVMeasLayer* ml =  dynamic_cast<const DDVMeasLayer*>( &(kalhit->GetMeasLayer() ) ) ;
+      const DDVMeasLayer* ml =  &measlayer;
       TVector3 pos = ml->HitToXv(*kalhit);
       streamlog_out( DEBUG2 )  << "Kaltrack::addAndFit : site discarded! at index : " << ml->GetIndex()
       << " for type " << ml->GetName() 
@@ -636,9 +639,9 @@ namespace MarlinTrk {
       << " z = " << pos.z()
       << " with CellIDs: " << std::endl;
       
-      for (unsigned int i = 0; i < (dynamic_cast<const DDVMeasLayer*>( &(kalhit->GetMeasLayer() ) )->getNCellIDs());++i) {
+      for (unsigned int i = 0; i < ncellids; ++i) {
         streamlog_out( DEBUG1 )  << " CellID = " 
-        << dynamic_cast<const DDVMeasLayer*>( &(kalhit->GetMeasLayer() ) )->getCellIDs()[i] 
+        << measlayer.getCellIDs()[i] 
         << std::endl ;
       }
       
