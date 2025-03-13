@@ -50,11 +50,11 @@ namespace MarlinTrk{
     xm = 0.;
     ym = 0.;
     
-    for(int i=1; i < 15; ++i){
+    for(int i=0; i < 15; ++i){
       ee0[i]=0.0;
     }
     
-    for( int i=1; i < 5; ++i){
+    for( int i=0; i < 5; ++i){
       grad[i]= 0.0;
       vv0[i] = 0.0;
     }
