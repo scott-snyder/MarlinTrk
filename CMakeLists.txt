@@ -2,7 +2,7 @@
 # cmake file for building MarlinTrk
 # - based on $MARLIN/example/mymarlin/CMakeLists.txt
 #   by @author Jan Engels, Desy IT
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6 FATAL_ERROR)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10 FATAL_ERROR)
 ########################################################
 
 
@@ -16,6 +16,7 @@ SET( ${PROJECT_NAME}_VERSION_MINOR 9)
 SET( ${PROJECT_NAME}_VERSION_PATCH 2 )
 
 cmake_policy(SET CMP0008 NEW)
+cmake_policy(SET CMP0167 NEW)
 
 ### DEPENDENCIES ############################################################
 
